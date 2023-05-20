@@ -4,13 +4,29 @@ public abstract class User {
     public int userId;
     public String userName;
     private String password;
+    public boolean isAdmin;
 
-    public User(int userId, String userName, String password) {
+    public User(int userId, String userName, String password, boolean isAdmin) {
         this.userId = userId;
         this.userName = userName;
         this.password = password;
+        this.isAdmin = isAdmin;
     }
 
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
+    }
+
+    /*-----------------------------------------------
+            The following two abstract functions will be implemented by the Customer and Admin classes and Admin
+            will have his/her own operations as well so his View will also be different.
+             ------------------------------------------------*/
+    public abstract void viewBooks();
+    public abstract void returnBook();
     public int getUserId() {
         return userId;
     }
