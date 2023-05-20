@@ -17,6 +17,6 @@ Application designed in Java Programming language<br>
   </ol>
 </ul>
 <br>
-## Asset Images
+## Asset Images<br>
 ### Class Diagram
 <img width="954" alt="image" src="https://github.com/Zohaib1397/Library-Management/assets/66197508/44f4f3e6-c183-4340-99f9-8229c674de56">
