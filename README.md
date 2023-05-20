@@ -20,5 +20,6 @@ Application designed in Java Programming language<br>
 ## Images
 
 ### Class Diagram
-<img width="960" alt="image" src="https://github.com/Zohaib1397/Library-Management/assets/66197508/e0e43db1-fecc-4926-b4fd-9193ac7097ca">
+<img width="948" alt="image" src="https://github.com/Zohaib1397/Library-Management/assets/66197508/6ad8de12-ffa0-4cc6-b4a5-09696aeb4ec3">
+
 
