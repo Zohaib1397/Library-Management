@@ -1,6 +1,6 @@
 package Structures;
 
-public class User {
+public abstract class User {
     public int userId;
     public String userName;
     private String password;
