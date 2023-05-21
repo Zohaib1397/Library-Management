@@ -22,9 +22,9 @@ public abstract class User {
     }
 
     /*-----------------------------------------------
-            The following two abstract functions will be implemented by the Customer and Admin classes and Admin
-            will have his/her own operations as well so his View will also be different.
-             ------------------------------------------------*/
+    The following two abstract functions will be implemented by the Customer and Admin classes and Admin
+    will have his/her own operations as well so his View will also be different.
+     ------------------------------------------------*/
     public abstract void viewBooks();
     public abstract void returnBook();
     public int getUserId() {
