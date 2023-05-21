@@ -1,5 +1,6 @@
 package Services;
 
+import Structures.DAO;
 import Structures.User;
 
 public class Controller {
