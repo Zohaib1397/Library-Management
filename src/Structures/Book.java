@@ -13,6 +13,9 @@ public class Book {
         this.bookPrice = bookPrice;
     }
 
+    public Book() {
+    }
+
     public int getBookId() {
         return bookId;
     }

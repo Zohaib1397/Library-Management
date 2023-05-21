@@ -1,8 +1,13 @@
+package Views;
+
+import Services.BookDAO;
+import Structures.Book;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MySQLBookDAO implements BookDAO {
+public class IssueBook implements BookDAO {
     private static final String JDBC_URL = "jdbc:mysql://localhost:3306/library";
     private static final String USERNAME = "assignment";
     private static final String PASSWORD = "123";
@@ -11,9 +16,9 @@ public class MySQLBookDAO implements BookDAO {
     public void addBook(Book book) {
         try (Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
              PreparedStatement statement = connection.prepareStatement("INSERT INTO books (title, author, quantity) VALUES (?, ?, ?)")) {
-            statement.setString(1, book.getTitle());
-            statement.setString(2, book.getAuthor());
-            statement.setInt(3, book.getQuantity());
+            statement.setString(1, book.getBookName());
+//            statement.setString(2, book.getAuthor());
+//            statement.setInt(3, book.getQuantity());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -29,13 +34,13 @@ public class MySQLBookDAO implements BookDAO {
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 String title = resultSet.getString("title");
-                String author = resultSet.getString("author");
+//                String author = resultSet.getString("author");
                 int quantity = resultSet.getInt("quantity");
                 Book book = new Book();
-                book.setId(id);
-                book.setTitle(title);
-                book.setAuthor(author);
-                book.setQuantity(quantity);
+                book.setBookId(id);
+                book.setBookName(title);
+//                book.setAuthor(author);
+//                book.setQuantity(quantity);
                 books.add(book);
             }
         } catch (SQLException e) {
