@@ -4,11 +4,22 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import static javax.swing.GroupLayout.Alignment.LEADING;
 import static javax.swing.GroupLayout.Alignment.TRAILING;
 
 public class LoginPage extends JFrame {
+    /*--------------------------------------------------
+     * Buttons and labels initialization for login page
+     * --------------------------------------------------*/
+    JLabel userLabel = new JLabel("Username");
+    JTextField userField = new JTextField();
+    JLabel passLabel = new JLabel("Password");
+    JTextField passField = new JTextField();
+    JButton loginBTN = new JButton("Login");
+    JButton cancelBTN = new JButton("Cancel");
+
     LoginPage() {
         setSize(400, 220);
         setPreferredSize(getSize());
@@ -16,16 +27,7 @@ public class LoginPage extends JFrame {
         ListenerDetection listenerDetection = new ListenerDetection();
         setVisible(true);
         setTitle("Login Page");
-        /*--------------------------------------------------
-         * Buttons and labels initialization for login page
-         * --------------------------------------------------*/
-        JLabel userLabel = new JLabel("Username");
-        JTextField userField = new JTextField();
-        JLabel passLabel = new JLabel("Password");
-        JTextField passField = new JTextField();
-        JButton loginBTN = new JButton("Login");
         loginBTN.addActionListener(listenerDetection);
-        JButton cancelBTN = new JButton("Cancel");
         cancelBTN.addActionListener(listenerDetection);
         //Creating a container that fill up whole space
         Container panel = getContentPane();
@@ -76,12 +78,27 @@ public class LoginPage extends JFrame {
         pack();
     }
 
-    static class ListenerDetection implements ActionListener {
+    private class ListenerDetection implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (e.getActionCommand().equals("Login")) {
-                //TODO perform Login operation
-                System.out.println("Login Pressed");
+                //Check if the fields are empty
+                //throw exception based on the condition
+                try {
+                    if (!userField.getText().equals("")) {
+                        //TODO perform Login operation
+                        /*
+                         * if login record found in the database
+                         * then go to the userView page
+                         * before proceeding any further the user must be identified if he/she is an admin or just a customer
+                         * */
+
+                    } else {
+                        throw new IOException("Login Fields must not be empty");
+                    }
+                } catch (IOException E) {
+                    JOptionPane.showMessageDialog(null, E.toString(), "Fields Empty Error", JOptionPane.ERROR_MESSAGE);
+                }
             } else {
                 System.exit(0);
             }

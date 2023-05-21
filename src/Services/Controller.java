@@ -4,6 +4,11 @@ import Structures.User;
 
 public class Controller {
     User user;
+    DAO dao;
+
+    public void authenticateUser(String username, String password) {
+
+    }
 
     public void viewBooks() {
         //TODO add implementation of view Books by detecting the state in controller
