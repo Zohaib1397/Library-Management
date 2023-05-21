@@ -2,6 +2,8 @@ package Views;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import static javax.swing.GroupLayout.Alignment.LEADING;
 import static javax.swing.GroupLayout.Alignment.TRAILING;
@@ -11,6 +13,7 @@ public class LoginPage extends JFrame {
         setSize(400, 220);
         setPreferredSize(getSize());
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        ListenerDetection listenerDetection = new ListenerDetection();
         setVisible(true);
         setTitle("Login Page");
         /*--------------------------------------------------
@@ -21,7 +24,9 @@ public class LoginPage extends JFrame {
         JLabel passLabel = new JLabel("Password");
         JTextField passField = new JTextField();
         JButton loginBTN = new JButton("Login");
+        loginBTN.addActionListener(listenerDetection);
         JButton cancelBTN = new JButton("Cancel");
+        cancelBTN.addActionListener(listenerDetection);
         //Creating a container that fill up whole space
         Container panel = getContentPane();
         GroupLayout groupLayout = new GroupLayout(panel);
@@ -69,9 +74,21 @@ public class LoginPage extends JFrame {
                         .addGap(50, 50, 50)
         );
         pack();
-
     }
-    public static void main(String[] args){
+
+    static class ListenerDetection implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (e.getActionCommand().equals("Login")) {
+                //TODO perform Login operation
+                System.out.println("Login Pressed");
+            } else {
+                System.exit(0);
+            }
+        }
+    }
+
+    public static void main(String[] args) {
         new LoginPage();
     }
 }
