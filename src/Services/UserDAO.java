@@ -1,17 +1,18 @@
 package Services;
 
 import Structures.Admin;
+import Structures.Customer;
 import Structures.DAO;
+import Structures.User;
 
 import java.sql.*;
 import java.util.List;
 
-public class AdminDAO implements DAO<Admin> {
+public class UserDAO implements DAO<User> {
 
     @Override
-    public Admin get(String username, String password) throws SQLException {
+    public User get(String username, String password) throws SQLException {
         Connection connection = Database.getConnection();
-        Admin admin = null;
         String query = "SELECT * FROM Users WHERE USERNAME=" + username + " AND PASSWORD=" + password;
         PreparedStatement statement = connection.prepareStatement(query);
         statement.setString(2, username);
@@ -21,28 +22,29 @@ public class AdminDAO implements DAO<Admin> {
             String UserName = rs.getString("USERNAME");
             String Password = rs.getString("PASSWORD");
             boolean isAdmin = rs.getBoolean("ADMIN");
-            admin = new Admin(id, UserName, Password, isAdmin);
+            if (isAdmin) return new Admin(id, UserName, Password, true);
+            else return new Customer(id, UserName, Password, false);
         }
-        return admin;
-    }
-
-    @Override
-    public List<Admin> getAll() throws SQLException {
         return null;
     }
 
     @Override
-    public boolean insert(Admin admin) throws SQLException {
+    public List<User> getAll() throws SQLException {
+        return null;
+    }
+
+    @Override
+    public boolean insert(User user) throws SQLException {
         return false;
     }
 
     @Override
-    public boolean delete(Admin admin) {
+    public boolean delete(User user) {
         return false;
     }
 
     @Override
-    public boolean update(Admin admin) throws SQLException {
+    public boolean update(User user) throws SQLException {
         return false;
     }
 }
