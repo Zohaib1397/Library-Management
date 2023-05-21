@@ -1,4 +1,8 @@
-package Views;
+ppublic class Book {
+    private int id;
+    private String title;
+    private String author;
+    private int quantity;
 
-public class AddBook {
+    // Constructor, getters, and setters
 }
