@@ -125,6 +125,10 @@ public class UserView extends JFrame {
                 hideUserView();
                 IssueBook issueBook = new IssueBook();
                 issueBook.setVisible(true);
+            } else if (e.getActionCommand().equals("Return Book")) {
+                hideUserView();
+                ReturnBook returnBook = new ReturnBook();
+                returnBook.setVisible(true);
             }
         }
     }

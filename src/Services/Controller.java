@@ -40,4 +40,8 @@ public class Controller {
         return bookModel.issueBook(bid, uid, period, issueDate);
     }
 
+    public boolean returnBook(int bid) {
+        return bookModel.returnBook(bid);
+    }
+
 }

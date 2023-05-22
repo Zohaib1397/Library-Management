@@ -18,4 +18,13 @@ public class BookModel {
             return false;
         }
     }
+
+    public boolean returnBook(int bid) {
+        dao = new BookDAO();
+        try {
+            return dao.deleteFromReturnable(bid);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

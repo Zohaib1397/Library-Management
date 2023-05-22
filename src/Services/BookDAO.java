@@ -1,8 +1,6 @@
 package Services;
 
-import Structures.Admin;
 import Structures.Book;
-import Structures.Customer;
 import Structures.ExtendedBookDAO;
 
 import java.sql.Connection;
@@ -77,8 +75,30 @@ public class BookDAO implements ExtendedBookDAO {
             int row = ps.executeUpdate();
             //Delete the previous book from the book record
             delete(new Book(bid, "sample", "sample", 0));
-            insert(book); //insert book into the Database of Issued Books
+            insertToReturnable(book); //insert book into the Database of Issued Books
             return true;
         } else return false;
+    }
+
+    @Override
+    public void insertToReturnable(Book book) throws SQLException {
+        Connection connection = Database.getConnection();
+        String query = "INSERT INTO Returnable(BID,BNAME,GENRE,PRICE)VALUES(?,?,?,?)";
+        PreparedStatement ps = connection.prepareStatement(query);
+        ps.setInt(1, book.bookId);
+        ps.setString(2, book.bookName);
+        ps.setString(3, book.bookGenre);
+        ps.setInt(4, book.bookPrice);
+        int row = ps.executeUpdate();
+    }
+
+    @Override
+    public boolean deleteFromReturnable(int bid) throws SQLException {
+        Connection connection = Database.getConnection();
+        String query = "DELETE FROM Books WHERE BID = ?";
+        PreparedStatement ps = connection.prepareStatement(query);
+        ps.setInt(1, bid);
+        int row = ps.executeUpdate();
+        return true;
     }
 }
