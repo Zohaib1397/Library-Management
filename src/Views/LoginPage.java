@@ -98,6 +98,7 @@ public class LoginPage extends JFrame {
                          * if login record found in the database
                          * then go to the userView page
                          * before proceeding any further the user must be identified if he/she is an admin or just a customer
+                         * The implementation of detection is performed in controller -> model -> authenticateUser()
                          * */
                         if (controller.authenticateUser(userField.getText(), passField.getText())) {
                             hideLoginPage();

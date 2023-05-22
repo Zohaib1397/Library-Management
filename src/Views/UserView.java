@@ -1,6 +1,6 @@
 package Views;
 
-import Logic.Model;
+import Logic.UserModel;
 import Structures.SelectedUser;
 import Structures.User;
 
@@ -8,7 +8,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class UserView extends JFrame {
@@ -25,7 +24,7 @@ public class UserView extends JFrame {
         setSize(550, 150);
         setPreferredSize(getSize());
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setTitle(Model.currentUser + " View");
+        setTitle(UserModel.currentUser + " View");
         Container panel = getContentPane();
         GroupLayout groupLayout = new GroupLayout(panel);
         panel.setLayout(groupLayout);
@@ -39,7 +38,7 @@ public class UserView extends JFrame {
         addBook.addActionListener(listenerDetection);
         returnBook.addActionListener(listenerDetection);
         createDatabase.addActionListener(listenerDetection);
-        if (Model.currentUser == SelectedUser.ADMIN) {
+        if (UserModel.currentUser == SelectedUser.ADMIN) {
             groupLayout.setHorizontalGroup(
                     groupLayout.createSequentialGroup()
                             .addGroup(
@@ -122,6 +121,10 @@ public class UserView extends JFrame {
                 UsersTable usersTable = new UsersTable(usersList);
                 hideUserView();
                 usersTable.setVisible(true);
+            } else if (e.getActionCommand().equals("Issue Book")) {
+                hideUserView();
+                IssueBook issueBook = new IssueBook();
+                issueBook.setVisible(true);
             }
         }
     }

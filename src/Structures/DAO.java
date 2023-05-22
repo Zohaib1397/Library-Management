@@ -13,7 +13,7 @@ public interface DAO<T> {
 
     public boolean insert(T t) throws SQLException;
 
-    public boolean delete(T t);
+    public boolean delete(T t) throws SQLException;
 
     public boolean update(T t) throws SQLException;
 }

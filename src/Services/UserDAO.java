@@ -7,7 +7,6 @@ import Structures.User;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
 
 public class UserDAO implements DAO<User> {
 
@@ -98,11 +97,13 @@ public class UserDAO implements DAO<User> {
 
     @Override
     public boolean delete(User user) {
+        //TODO add delete operation over here but it is not currently required as per the requirements
         return false;
     }
 
     @Override
     public boolean update(User user) throws SQLException {
+        //TODO add update operation over here but it is not currently required as per the requirements
         return false;
     }
 }

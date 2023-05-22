@@ -6,10 +6,13 @@ import Structures.User;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class UsersTable extends JFrame {
     DefaultTableModel tableModel;
+    JButton goBack = new JButton("Go Back");
 
     public UsersTable(ArrayList<User> usersList) {
         setSize(300, 400);
@@ -30,11 +33,21 @@ public class UsersTable extends JFrame {
         groupLayout.setHorizontalGroup(
                 groupLayout.createParallelGroup()
                         .addComponent(scrollPane)
+                        .addComponent(goBack)
         );
         groupLayout.setVerticalGroup(
                 groupLayout.createParallelGroup()
                         .addComponent(scrollPane)
+                        .addComponent(goBack)
         );
         pack();
+        goBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+                UserView userView = new UserView();
+                userView.setVisible(true);
+            }
+        });
     }
 }
