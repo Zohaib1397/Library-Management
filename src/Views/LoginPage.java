@@ -1,15 +1,20 @@
 package Views;
 
+import Services.Controller;
+
 import javax.swing.*;
+import javax.swing.text.JTextComponent;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.sql.SQLException;
 
 import static javax.swing.GroupLayout.Alignment.LEADING;
 import static javax.swing.GroupLayout.Alignment.TRAILING;
 
 public class LoginPage extends JFrame {
+    public static Controller controller = new Controller();
     /*--------------------------------------------------
      * Buttons and labels initialization for login page
      * --------------------------------------------------*/
@@ -78,6 +83,10 @@ public class LoginPage extends JFrame {
         pack();
     }
 
+    void visibilityOfPage(boolean visibility) {
+        setVisible(visibility);
+    }
+
     private class ListenerDetection implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -85,19 +94,27 @@ public class LoginPage extends JFrame {
                 //Check if the fields are empty
                 //throw exception based on the condition
                 try {
-                    if (!userField.getText().equals("")) {
-                        //TODO perform Login operation
+                    if (!userField.getText().equals("") && !passField.getText().equals("")) {
                         /*
                          * if login record found in the database
                          * then go to the userView page
                          * before proceeding any further the user must be identified if he/she is an admin or just a customer
                          * */
+                        if (controller.authenticateUser(userField.getText(), passField.getText())) {
+                            visibilityOfPage(false);
+                            UserView userView = new UserView();
+                            userView.setVisible(true);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "User record not found", "Code 404", JOptionPane.ERROR_MESSAGE);
+                        }
 
                     } else {
                         throw new IOException("Login Fields must not be empty");
                     }
                 } catch (IOException E) {
                     JOptionPane.showMessageDialog(null, E.toString(), "Fields Empty Error", JOptionPane.ERROR_MESSAGE);
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
                 }
             } else {
                 System.exit(0);

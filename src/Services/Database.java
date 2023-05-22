@@ -22,9 +22,17 @@ public class Database {
 
     }
 
-    public static Connection getConnection() throws SQLException {
-        Connection connection = null;
-        connection = DriverManager.getConnection(url, user, password);
-        return connection;
+    public static Connection getConnection() {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = null;
+            connection = DriverManager.getConnection(url, user, password);
+            return connection;
+
+        } catch (SQLException e) {
+            throw new RuntimeException();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

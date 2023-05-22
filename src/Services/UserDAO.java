@@ -13,13 +13,18 @@ public class UserDAO implements DAO<User> {
     @Override
     public User get(String username, String password) throws SQLException {
         Connection connection = Database.getConnection();
-        String query = "SELECT * FROM Users WHERE USERNAME=" + username + " AND PASSWORD=" + password;
+        System.out.println(connection != null ? "Connected to network" : "Connection Failed");
+        String query = "SELECT * FROM Users WHERE USERNAME = ? AND PASSWORD = ? ";
+        assert connection != null;
         PreparedStatement statement = connection.prepareStatement(query);
-        statement.setString(2, username);
+        statement.setString(1, username);
+        statement.setString(2, password);
         ResultSet rs = statement.executeQuery();
+        System.out.println(rs);
         if (rs.next()) {
             int id = rs.getInt("UID");
             String UserName = rs.getString("USERNAME");
+            System.out.println(UserName);
             String Password = rs.getString("PASSWORD");
             boolean isAdmin = rs.getBoolean("ADMIN");
             if (isAdmin) return new Admin(id, UserName, Password, true);
