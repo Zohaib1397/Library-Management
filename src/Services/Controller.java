@@ -5,6 +5,7 @@ import Structures.DAO;
 import Structures.User;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Controller {
     User user;
@@ -20,5 +21,9 @@ public class Controller {
 
     public boolean addUser(String username, String password, boolean isAdmin) throws SQLException {
         return model.addUser(username, password, isAdmin);
+    }
+
+    public ArrayList<User> getAllUsers() {
+        return model.getAllUsers();
     }
 }

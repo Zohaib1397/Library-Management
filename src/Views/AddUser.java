@@ -21,7 +21,6 @@ public class AddUser extends JFrame {
         setSize(400, 220);
         setPreferredSize(getSize());
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setVisible(true);
         setTitle("Add User Page");
         Container panel = getContentPane();
         GroupLayout groupLayout = new GroupLayout(panel);

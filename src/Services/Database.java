@@ -18,10 +18,6 @@ public class Database {
     private static final String user = "sql12619829";
     private static final String password = "gPVD5DFyqs";
 
-    Database() {
-
-    }
-
     public static Connection getConnection() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");

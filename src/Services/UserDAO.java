@@ -6,6 +6,7 @@ import Structures.DAO;
 import Structures.User;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserDAO implements DAO<User> {
@@ -62,27 +63,24 @@ public class UserDAO implements DAO<User> {
     }
 
     @Override
-    public List<User> getAll() throws SQLException {
-//        Connection connection = Database.getConnection();
-//        System.out.println(connection != null ? "Connected to network" : "Connection Failed");
-//        String query = "SELECT * FROM Users";
-//        assert connection != null;
-//        PreparedStatement statement = connection.prepareStatement(query);
-//        ResultSet rs = statement.executeQuery();
-//        System.out.println(rs);
-//        if (rs.next()) {
-//            int id = rs.getInt("UID");
-//            String UserName = rs.getString("USERNAME");
-//            System.out.println(UserName);
-//            String Password = rs.getString("PASSWORD");
-//            boolean isAdmin = rs.getBoolean("ADMIN");
-//            /*---------------------------------
-//             * Based on the isAdmin value the object of user will return either the Admin or Customer
-//             * --------------------------------*/
-//            if (isAdmin) return new Admin(id, UserName, Password, true);
-//            else return new Customer(id, UserName, Password, false);
-//        }
-        return null;
+    public ArrayList<User> getAll() throws SQLException {
+        ArrayList<User> usersList = new ArrayList<>();
+        Connection connection = Database.getConnection();
+        System.out.println(connection != null ? "Connected to network" : "Connection Failed");
+        String query = "SELECT * FROM Users";
+        assert connection != null;
+        PreparedStatement statement = connection.prepareStatement(query);
+        ResultSet rs = statement.executeQuery();
+        System.out.println(rs);
+        while (rs.next()) {
+            int id = rs.getInt("UID");
+            String UserName = rs.getString("USERNAME");
+            System.out.println(UserName);
+            String Password = rs.getString("PASSWORD");
+            boolean isAdmin = rs.getBoolean("ADMIN");
+            usersList.add(new Admin(id, UserName, Password, isAdmin));
+        }
+        return usersList;
     }
 
     @Override

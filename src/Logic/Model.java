@@ -5,6 +5,7 @@ import Structures.*;
 
 import javax.swing.*;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Model {
     /*------------------------------------------------------------
@@ -32,20 +33,26 @@ public class Model {
         try {
             User user = dao.search(username);
             if (user != null) {
-//                JOptionPane.showMessageDialog(null, "Username must be different", "Username already exists", JOptionPane.ERROR_MESSAGE);
                 return false;
             }
             User newUser;
             //ID will be auto incremented in the database
-            if (isAdmin) {
-                newUser = new Admin(0, username, password, true);
-            } else {
-                newUser = new Customer(0, username, password, false);
-            }
+            newUser = isAdmin
+                    ? new Admin(0, username, password, true)
+                    : new Customer(0, username, password, false);
             return dao.insert(newUser);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.toString(), "Something went wrong", JOptionPane.ERROR_MESSAGE);
             return false;
+        }
+    }
+
+    public ArrayList<User> getAllUsers() {
+        UserDAO dao = new UserDAO();
+        try {
+            return dao.getAll();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 }

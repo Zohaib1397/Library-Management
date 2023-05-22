@@ -1,6 +1,7 @@
 package Structures;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public interface DAO<T> {
@@ -8,7 +9,7 @@ public interface DAO<T> {
 
     public T search(String data) throws SQLException;
 
-    public List<T> getAll() throws SQLException;
+    public ArrayList<T> getAll() throws SQLException;
 
     public boolean insert(T t) throws SQLException;
 
