@@ -3,7 +3,6 @@ package Views;
 import Services.Controller;
 
 import javax.swing.*;
-import javax.swing.text.JTextComponent;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -83,8 +82,8 @@ public class LoginPage extends JFrame {
         pack();
     }
 
-    void visibilityOfPage(boolean visibility) {
-        setVisible(visibility);
+    void hideLoginPage() {
+        setVisible(false);
     }
 
     private class ListenerDetection implements ActionListener {
@@ -101,7 +100,7 @@ public class LoginPage extends JFrame {
                          * before proceeding any further the user must be identified if he/she is an admin or just a customer
                          * */
                         if (controller.authenticateUser(userField.getText(), passField.getText())) {
-                            visibilityOfPage(false);
+                            hideLoginPage();
                             UserView userView = new UserView();
                             userView.setVisible(true);
                         } else {
