@@ -36,6 +36,9 @@ public class Controller {
     /*---------------END--------------------
      * The following section is for the Book functions
      * --------------Start-------------------*/
+    //TODO Usama Task to add Book
+    //TODO Usama Task to View Books
+    //TODO Usama Task to View Issued Books
     public boolean issueBook(int bid, int uid, int period, String issueDate) {
         return bookModel.issueBook(bid, uid, period, issueDate);
     }

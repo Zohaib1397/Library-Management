@@ -36,12 +36,13 @@ public class BookDAO implements ExtendedBookDAO {
 
     @Override
     public ArrayList<Book> getAll() throws SQLException {
-
+        //TODO Usama Task
         return null;
     }
 
     @Override
     public boolean insert(Book book) throws SQLException {
+        //TODO Usama Task
         return false;
     }
 
