@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.sql.SQLException;
 
 public class AddUser extends JFrame {
     JTextField usernameField = new JTextField();
@@ -19,6 +21,7 @@ public class AddUser extends JFrame {
         setSize(400, 220);
         setPreferredSize(getSize());
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setVisible(true);
         setTitle("Add User Page");
         Container panel = getContentPane();
         GroupLayout groupLayout = new GroupLayout(panel);
@@ -29,6 +32,7 @@ public class AddUser extends JFrame {
         cancel.addActionListener(listenerDetection);
         btnGroup.add(isAdmin);
         btnGroup.add(isNotAdmin);
+        isNotAdmin.setSelected(true);
         JLabel user = new JLabel("Username");
         JLabel pass = new JLabel("Password");
         JLabel role = new JLabel("Role");
@@ -40,6 +44,7 @@ public class AddUser extends JFrame {
                                         .addComponent(user)
                                         .addComponent(pass)
                                         .addComponent(role)
+                                        .addComponent(save)
                         )
                         .addGroup(
                                 groupLayout.createParallelGroup()
@@ -50,6 +55,7 @@ public class AddUser extends JFrame {
                                                         .addComponent(isAdmin)
                                                         .addComponent(isNotAdmin)
                                         )
+                                        .addComponent(cancel)
                         ).addGap(50, 50, 50)
         );
         groupLayout.setVerticalGroup(
@@ -69,7 +75,13 @@ public class AddUser extends JFrame {
                                 groupLayout.createParallelGroup()
                                         .addComponent(role)
                                         .addComponent(isAdmin)
-                                        .addComponent(isNotAdmin))
+                                        .addComponent(isNotAdmin)
+                        )
+                        .addGroup(
+                                groupLayout.createParallelGroup()
+                                        .addComponent(save)
+                                        .addComponent(cancel)
+                        )
                         .addGap(50, 50, 50)
         );
     }
@@ -82,19 +94,26 @@ public class AddUser extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (e.getActionCommand().equals("Save")) {
-                hideAddUserPage();
-                //TODO add data to database
-                UserView userView = new UserView();
-                userView.setVisible(true);
+                try {
+                    if (!usernameField.getText().equals("") && !passwordField.getText().equals("")) {
+                        if (LoginPage.controller.addUser(usernameField.getText(), passwordField.getText(), isAdmin.isSelected())) {
+                            hideAddUserPage();
+                            UserView userView = new UserView();
+                            userView.setVisible(true);
+                        } else {
+                            throw new IOException("Username already exists");
+                        }
+                    } else {
+                        throw new IOException("Add User Fields must not be empty");
+                    }
+                } catch (Exception E) {
+                    JOptionPane.showMessageDialog(null, E.toString(), "Something went wrong", JOptionPane.ERROR_MESSAGE);
+                }
             } else {
                 hideAddUserPage();
                 UserView userView = new UserView();
                 userView.setVisible(true);
             }
         }
-    }
-
-    public static void main(String[] args) {
-        new AddUser();
     }
 }

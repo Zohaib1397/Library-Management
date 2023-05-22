@@ -1,9 +1,7 @@
 package Logic;
 
 import Services.UserDAO;
-import Structures.DAO;
-import Structures.SelectedUser;
-import Structures.User;
+import Structures.*;
 
 import javax.swing.*;
 import java.sql.SQLException;
@@ -23,6 +21,28 @@ public class Model {
             if (user == null) return false;
             currentUser = user.isAdmin ? SelectedUser.ADMIN : SelectedUser.CUSTOMER;
             return true;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString(), "Something went wrong", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+    }
+
+    public boolean addUser(String username, String password, boolean isAdmin) {
+        UserDAO dao = new UserDAO();
+        try {
+            User user = dao.search(username);
+            if (user != null) {
+//                JOptionPane.showMessageDialog(null, "Username must be different", "Username already exists", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+            User newUser;
+            //ID will be auto incremented in the database
+            if (isAdmin) {
+                newUser = new Admin(0, username, password, true);
+            } else {
+                newUser = new Customer(0, username, password, false);
+            }
+            return dao.insert(newUser);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.toString(), "Something went wrong", JOptionPane.ERROR_MESSAGE);
             return false;
