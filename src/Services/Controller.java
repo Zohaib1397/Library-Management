@@ -46,5 +46,8 @@ public class Controller {
     public boolean returnBook(int bid) {
         return bookModel.returnBook(bid);
     }
+    public boolean addBook(Book book){
+        return bookModel.insert(book);
+    }
 
 }
