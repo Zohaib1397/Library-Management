@@ -27,5 +27,12 @@ public class BookModel {
             throw new RuntimeException(e);
         }
     }
+    public boolean insertBook(Book book){
+        try{
+            return dao.insert(book);
+        }catch(Exception e){
+            return false;
+        }
+    }
 
 }
