@@ -42,8 +42,15 @@ public class BookDAO implements ExtendedBookDAO {
 
     @Override
     public boolean insert(Book book) throws SQLException {
-        //TODO Usama Task
-        return false;
+        Connection connection = Database.getConnection();
+        String query = "INSERT INTO Book(BID,BNAME,GENRE,PRICE)VALUES(?,?,?,?)";
+        PreparedStatement st = connection.prepareStatement(query);
+        st.setInt(1,book.bookId);
+        st.setString(2,book.bookName);
+        st.setString(3,book.bookGenre);
+        st.setInt(4,book.bookPrice);
+        st.executeUpdate();
+        return true;
     }
 
     @Override
